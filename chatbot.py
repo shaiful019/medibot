@@ -10,9 +10,11 @@ from langchain_core.runnables import RunnablePassthrough
 from cachetools import cached, TTLCache
 import os
 from langdetect import detect
+# from config import OPENAI_API_KEY
 
 # Set OpenAI API key
-os.environ["OPENAI_API_KEY"] = "sk-proj-jruZRi8TJjmA8BlyIqhKT3BlbkFJSAm4cRePs8ZC70Sh2wif"
+# os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 # Custom CSS to change header color
 custom_css = """
@@ -34,9 +36,8 @@ def load_data():
     try:
         with st.spinner(text="Loading and indexing the documents. This should take 1-2 minutes."):
             # loader = PyPDFDirectoryLoader("data")
-            loader = Docx2txtLoader("data/Heart_Problem.docx")
+            loader = Docx2txtLoader("data\Heart_Problem2.docx")
             data = loader.load()
-            print(data)
 
             chunk_size = 400
             chunk_overlap = 100
